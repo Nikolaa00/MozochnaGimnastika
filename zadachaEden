@@ -1,0 +1,102 @@
+#include <iostream>
+
+using namespace std;
+
+void enterTheRightN(int n)
+{
+    while(n<0||n%2!=1||n<3)
+        {
+        cout<<"Vnesi tochen broj :"<<endl;
+        cin>>n;
+        }
+}
+
+void fillQuadraticMatrix(int n,int originalMatrix[100][100])
+{
+    int number;
+    for(int i=0; i<n; i++)
+        {
+        for(int j=0; j<n; j++)
+            {
+            cin>>number;
+            originalMatrix[i][j]=number;
+            }
+        }
+}
+
+void printQuadraticMatrix(int n,int originalMatrix[100][100])
+{
+    for(int i=0; i<n; i++)
+        {
+        for(int j=0; j<n; j++)
+            {
+            cout<<originalMatrix[i][j]<<"\t";
+            }
+        cout<<endl;
+        }
+}
+
+void findAndPrintMatrixWithSumOfRegions(int n,int originalMatrix[100][100])
+{
+    int sumRegionOne=0,sumRegionTwo=0,sumRegionThree=0,sumRegionFour=0;
+    int matrixWithSumOfRegions[100][100];
+    int m=2;
+
+    for(int i=0; i<2; i++)
+        {
+        for(int j=0; j<2; j++)
+            {
+            sumRegionOne=sumRegionOne+originalMatrix[i][j];
+            }
+        }
+    matrixWithSumOfRegions[0][0]=sumRegionOne;
+
+    for(int i=0; i<2; i++)
+        {
+        for(int j=n-2; j<n; j++)
+            {
+            sumRegionTwo=sumRegionTwo+originalMatrix[i][j];
+            }
+        }
+    matrixWithSumOfRegions[0][1]=sumRegionTwo;
+
+    for(int i=n-2; i<n; i++)
+        {
+        for(int j=0; j<2; j++)
+            {
+            sumRegionThree=sumRegionThree+originalMatrix[i][j];
+            }
+        }
+    matrixWithSumOfRegions[1][0]=sumRegionThree;
+
+    for(int i=n-2; i<n; i++)
+        {
+        for(int j=n-2; j<n; j++)
+            {
+            sumRegionFour=sumRegionFour+originalMatrix[i][j];
+            }
+        }
+    matrixWithSumOfRegions[1][1]=sumRegionFour;
+
+    printQuadraticMatrix(m,matrixWithSumOfRegions);
+}
+int main()
+{
+    int originalMatrix[100][100];
+    int n;
+
+    cout<<"Vnesi poziteven neparen broj ednakov ili pogolem od brojot '3' koj ke bidi dolzhinata i shirinata na kvadratnata matrica:"<<endl;
+    cin>>n;
+    enterTheRightN(n);
+
+    cout<< "Vnesi gi elementite na matricata: "<<endl;
+    fillQuadraticMatrix( n, originalMatrix);
+
+    cout<< "Vnesenata matrica e :"<<endl;
+    printQuadraticMatrix(n,originalMatrix);
+
+    cout<<"Matricata so sumata na sekoj region poedinechno:"<<endl;
+    findAndPrintMatrixWithSumOfRegions(n,originalMatrix);
+
+    return 0;
+}
