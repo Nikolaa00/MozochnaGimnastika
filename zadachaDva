@@ -1,0 +1,74 @@
+#include <iostream>
+
+using namespace std;
+
+int insertBingoNumbers(int arrayOfBingoNumbers[100],int counter)
+{
+    int i=0;
+    int number;
+    while(number>=1&&number<=90)
+        {
+        cin>>number;
+        arrayOfBingoNumbers[i]=number;
+        counter++;
+        i++;
+        }
+    if((counter-1)<8)
+        {
+        cout<<"Vnesovte broj na broevi pomalku od 8! Vnesete 8 ili poveke broevi:"<<endl;
+
+        return  insertBingoNumbers(arrayOfBingoNumbers,counter=0);
+        }
+    return counter;
+}
+
+void printBingoNumbers(int arrayOfBingoNumbers[100],int countt)
+{
+    for (int i = 0; i <countt-1; i++)
+        {
+        cout << arrayOfBingoNumbers[i] << " ";
+        }
+    cout<<endl;
+}
+
+void formAndPrintJokerNumber(int arrayOfNumbers[100],int countt,int arrayWithJokerNumber[100] )
+{
+    for (int i = 0; i <countt; i++)
+        {
+        if(i<7)
+            {
+            arrayWithJokerNumber[i]=arrayOfNumbers[i]%10 ;
+            }
+        if(i>6)
+            {
+            arrayWithJokerNumber[i]=arrayOfNumbers[i];
+            }
+        }
+    cout<<"Vashiot Joker Broj e: ";
+    for (int i = 0; i <countt-1; i++)
+        {
+        cout << arrayWithJokerNumber[i];
+        }
+}
+
+int main()
+{
+    int arrayOfBingoNumbers[100];
+    int arrayWithJokerNumber[100];
+    int counter=0;
+    int countt=0;
+
+    cout << "Izvlechete 8 broevi pomegu vrednostite 1 i 90:" << endl;
+    countt=insertBingoNumbers(arrayOfBingoNumbers, counter);
+
+    cout<<endl;
+
+    cout<<"Vashite broevi se: "<<endl;
+    printBingoNumbers(arrayOfBingoNumbers, countt);
+
+    cout<<endl;
+
+    formAndPrintJokerNumber(arrayOfBingoNumbers,countt,arrayWithJokerNumber);
+
+    return 0;
+}
